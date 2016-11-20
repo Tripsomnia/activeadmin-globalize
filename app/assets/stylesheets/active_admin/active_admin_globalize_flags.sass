@@ -40,6 +40,12 @@
 // Used to distantiate inline locale selector
 span.inline-locale-selector
   margin-right: 10px
+  > .ui-translation-trigger
+    opacity: .4
+    &.empty
+      filter: grayscale(100%)
+    &.active
+      opacity: 1
 
 .field-translation.hidden
   display: none

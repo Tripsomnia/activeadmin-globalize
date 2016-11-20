@@ -155,6 +155,8 @@ $ ->
     $td = $(this).closest('td')
     $('.field-translation', $td).hide()
     $(".locale-#{$locale}", $td).show()
+    $(this).parent().children('a.ui-translation-trigger').removeClass('active')
+    $(this).addClass('active')
     e.preventDefault()
 
   translations()
