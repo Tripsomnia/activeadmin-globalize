@@ -21,7 +21,7 @@ module ActiveAdmin
           end <<
           available_locales.map do |locale|
             translation = object.translations.find { |t| t.locale.to_s == locale.to_s }
-            translation ||= object.translations.build(locale: locale)
+            translation ||= object.build_translation(locale: locale)
             fields = proc do |form|
               form.input(:locale, as: :hidden)
               form.input(:id, as: :hidden)
