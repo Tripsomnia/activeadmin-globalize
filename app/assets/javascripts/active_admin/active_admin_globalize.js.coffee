@@ -37,7 +37,7 @@ $ ->
         $dom.data("ready", true)
         $tabs = $("li > a", this)
         # content to toggle is different according to current action
-        $contents = if showAction then $(this).siblings("div.field-translation") else $(this).siblings("fieldset")
+        $contents = if showAction then $(this).siblings("div.field-translation") else $(this).parent().find(".locale-fieldset")
 
         $tabs.click (e) ->
           $tab = $(this)
@@ -114,14 +114,14 @@ $ ->
           $form.data('ready')
           $form.submit ->
             # Get all translations (the nested ones too).
-            $('.activeadmin-translations > ul').each ->
+            $('.activeadmin-translations > .available-locales').each ->
               # Get the corresponding fieldsets.
-              $fieldsets = $(this).siblings('fieldset')
+              $fieldsets = $(this).parent().find('.locale-fieldset')
               $("li:not(.add-locale) > a", this).each ->
                 # Remove them if the locale is hidden.
                 if $(this).hasClass('hidden')
                   # check if it's an existing translation otherwise remove it
-                  $currentFieldset = $("fieldset#{$(this).attr('href')}")
+                  $currentFieldset = $(".locale-fieldset#{$(this).attr('href')}")
                   $translationId = $('input[id$=_id]', $currentFieldset)
                   if $translationId.val()
                     # mark it for database removal appending a _destroy element
