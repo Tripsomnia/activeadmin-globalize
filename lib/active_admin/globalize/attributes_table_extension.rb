@@ -107,14 +107,14 @@ module ActiveAdmin
 
       def block_locale_selectors(field, initial_locale, &block)
         content_tag(:ul, class: 'available-locales locale-selector') do
-          available_translations.map(&:locale).map do |locale|
+          available_translations.map do |translation|
             css_classes = ['translation-tab']
             css_classes << 'active' if translation.locale == initial_locale.to_sym
             css_classes << 'empty' unless content.presence
             content_tag(:li, class: css_classes) do
-              I18n.with_locale(locale) do
+              I18n.with_locale(translation.locale) do
                 default = 'default' if translation.locale == initial_locale.to_sym
-                content_tag(:a, I18n.t(:"active_admin.globalize.language.#{locale}"), href: ".locale-#{locale}", class: default)
+                content_tag(:a, I18n.t(:"active_admin.globalize.language.#{translation.locale}"), href: ".locale-#{translation.locale}", class: default)
               end
             end
           end.join.html_safe
